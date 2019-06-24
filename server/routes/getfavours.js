@@ -1,5 +1,5 @@
 const Router = require('koa-router');
-//登录处理
+//获取“我喜欢的”列表处理
 let router = new Router();
 
 router.get('/getfavours', async(ctx, next) => {
