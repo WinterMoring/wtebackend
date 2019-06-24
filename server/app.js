@@ -15,8 +15,9 @@ onerror(app)
 app.use(koabody({
     multipart: true, // 允许上传多个文件
     formidable: {
-        uploadDir: 'public/images/', // 上传的文件存储的路径 
-        keepExtensions: true //  保存图片的扩展名
+        //uploadDir: 'public/images/', // 上传的文件存储的路径 不能写，写了就直接上传了
+        //keepExtensions: true, //  保存图片的扩展名
+        maxFileSize: 200 * 1024 * 1024
     }
 }))
 app.use(json())
