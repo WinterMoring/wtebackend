@@ -1,9 +1,8 @@
 const Koa = require('koa')
 const app = new Koa()
-const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
-const bodyparser = require('koa-bodyparser')
+const koabody = require('koa-body')
 const logger = require('koa-logger')
 
 const index = require('./routes/index')
@@ -13,8 +12,12 @@ const db = require('./libs/database');
 onerror(app)
 
 // middlewares
-app.use(bodyparser({
-    enableTypes: ['json', 'form', 'text']
+app.use(koabody({
+    multipart: true, // 允许上传多个文件
+    formidable: {
+        uploadDir: 'public/images/', // 上传的文件存储的路径 
+        keepExtensions: true //  保存图片的扩展名
+    }
 }))
 app.use(json())
 app.use(logger())
