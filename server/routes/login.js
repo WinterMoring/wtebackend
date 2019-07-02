@@ -1,4 +1,5 @@
 const Router = require('koa-router');
+const addtoken = require('../libs/addtoken.js');
 //登录处理
 let router = new Router();
 
@@ -20,7 +21,9 @@ router.get('/login', async(ctx, next) => {
             msg: '密码错误'
         }
     } else {
+        let tk = addtoken({ username }) //token中要携带的信息，自己定义
         ctx.body = {
+            token: tk,
             state: 0,
             msg: '登录成功'
         }
