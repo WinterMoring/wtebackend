@@ -4,7 +4,7 @@ let router = new Router();
 
 router.get('/getfavours', async(ctx, next) => {
     let username = ctx.query.username;
-    let data = await ctx.db.query('SELECT food_table.id , foodname FROM food_table LEFT JOIN user_table ON food_table.userid = user_table.id WHERE user_table.USERNAME = ? AND DELFLAG=0', [username]);
+    let data = await ctx.db.query('SELECT food_table.id , foodname , discription FROM food_table LEFT JOIN user_table ON food_table.userid = user_table.id WHERE user_table.USERNAME = ? AND DELFLAG=0', [username]);
     ctx.body = data;
 
     if (data.length == 0) { //用户名不存在
