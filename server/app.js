@@ -8,6 +8,7 @@ const logger = require('koa-logger')
 const index = require('./routes/index')
 
 const db = require('./libs/database');
+const cors = require('koa-cors');
 // error handler
 onerror(app)
 
@@ -23,6 +24,15 @@ app.use(koabody({
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
+
+app.use(cors({
+    origin: "*",
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+    maxAge: 5,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'DELETE'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}))
 
 
 // logger
