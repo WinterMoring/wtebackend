@@ -17,10 +17,11 @@ router.get('/delfavours', async(ctx, next) => {
         } else {
             try {
                 let foodid = ctx.query.foodid;
-                await ctx.db.query('UPDATE food_table SET delflag = 1 WHERE id = ?', [foodid]).then(() => {
+                await ctx.db.query('UPDATE food_table SET delflag = 1 WHERE id = ?', [foodid]).then(res => {
                     ctx.body = {
                         state: 0,
                         msg: '删除成功',
+                        res: res
                     }
                 })
 
