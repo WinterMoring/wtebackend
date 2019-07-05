@@ -18,7 +18,7 @@ router.post('/addfavours', async(ctx, next) => {
         if (res && res.exp <= new Date() / 1000) {
             ctx.body = {
                 message: 'token过期',
-                code: -1
+                code: 2
             };
         } else {
             try {
@@ -60,7 +60,7 @@ router.post('/addfavours', async(ctx, next) => {
     } else { // 没有取到token
         ctx.body = {
             msg: '没有token',
-            code: -2
+            code: 3
         }
     }
 });

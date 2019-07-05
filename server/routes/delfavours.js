@@ -12,7 +12,7 @@ router.get('/delfavours', async(ctx, next) => {
         if (res && res.exp <= new Date() / 1000) {
             ctx.body = {
                 message: 'token过期',
-                code: 3
+                state: 2
             };
         } else {
             try {
@@ -21,7 +21,7 @@ router.get('/delfavours', async(ctx, next) => {
                     ctx.body = {
                         state: 0,
                         msg: '删除成功',
-                        res: res
+
                     }
                 })
 
@@ -36,7 +36,7 @@ router.get('/delfavours', async(ctx, next) => {
     } else { // 没有取到token
         ctx.body = {
             msg: '没有token',
-            code: 0
+            state: 1
         }
     }
 });

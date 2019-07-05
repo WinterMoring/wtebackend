@@ -11,7 +11,7 @@ router.get('/getfavours', async(ctx, next) => {
         if (res && res.exp <= new Date() / 1000) {
             ctx.body = {
                 message: 'token过期',
-                code: 3
+                code: 2
             };
         } else {
             let username = ctx.query.username;
@@ -33,7 +33,7 @@ router.get('/getfavours', async(ctx, next) => {
     } else { // 没有取到token
         ctx.body = {
             msg: '没有token',
-            code: 0
+            code: 3
         }
     }
 });
