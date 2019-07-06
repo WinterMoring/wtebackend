@@ -23,7 +23,7 @@ router.post('/addfavours', async(ctx, next) => {
         } else {
             try {
                 //检索数据库
-                let querydata = await ctx.db.query('SELECT foodname FROM food_table LEFT JOIN user_table ON food_table.userid = user_table.id WHERE user_table.USERNAME = ? AND food_table.foodname = ?', [username, foodname]);
+                let querydata = await ctx.db.query('SELECT foodname FROM food_table LEFT JOIN user_table ON food_table.userid = user_table.id WHERE user_table.username = ? AND food_table.foodname = ?', [username, foodname]);
                 if (querydata.length != 0) { //
                     ctx.response.body = {
                         state: -1,
@@ -43,7 +43,7 @@ router.post('/addfavours', async(ctx, next) => {
                     //     // 可读流通过管道写入可写流
                     //     reader.pipe(upStream);
                     // }
-                    await ctx.db.query('INSERT INTO food_table (foodname,discription,userid) VALUES ( ? , ? ,( SELECT ID FROM USER_TABLE WHERE USERNAME=?))', [foodname, discription, username]);
+                    await ctx.db.query('INSERT INTO food_table (foodname,discription,userid) VALUES ( ? , ? ,( SELECT ID FROM user_table WHERE username=?))', [foodname, discription, username]);
                     ctx.response.body = {
                         state: 0,
                         msg: "添加成功"
